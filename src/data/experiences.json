@@ -30,5 +30,17 @@
     "role": "Assistant Communication Digitale",
     "period": "Décembre 2022 - Août 2023",
     "bullets": []
+  },
+  {
+    "slug": "infocom-94-1",
+    "company": "Infocom 94",
+    "role": "Assistant Communication Digitale",
+    "period": "Décembre 2022 - Août 2023",
+    "bullets": [
+      "- Animation de l'environnement web (site, réseaux sociaux, intranet)",
+      "- Réalisation des différents supports de communication",
+      "- Gestion de la photographie et des interviews en toute autonomie",
+      "- Animation de la rubrique cybersécurité lors des réunions interne"
+    ]
   }
 ]
