@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { projects, certifications, experiences } from "@/data/content";
+import { projects, certifications, experiences, profile } from "@/data/content";
 import LogoutButton from "./LogoutButton";
+import CvUploadForm from "./CvUploadForm";
 
 export default function AdminDashboard() {
   return (
@@ -9,6 +10,8 @@ export default function AdminDashboard() {
         <h1 className="text-2xl font-semibold">Admin</h1>
         <LogoutButton />
       </div>
+
+      <CvUploadForm currentCv={profile.cv} />
 
       <section className="mb-12">
         <div className="mb-4 flex items-center justify-between">
