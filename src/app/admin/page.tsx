@@ -27,13 +27,21 @@ export default function AdminDashboard() {
               <p className="font-medium">{project.title}</p>
               <p className="text-xs text-foreground-muted">/projects/{project.slug}</p>
             </div>
-            <Link
-              href={`/projects/${project.slug}`}
-              target="_blank"
-              className="text-sm text-[var(--accent-2)] hover:underline"
-            >
-              Voir →
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href={`/admin/projects/${project.slug}/edit`}
+                className="text-sm text-[var(--accent-2)] hover:underline"
+              >
+                Éditer
+              </Link>
+              <Link
+                href={`/projects/${project.slug}`}
+                target="_blank"
+                className="text-sm text-foreground-muted hover:underline"
+              >
+                Voir →
+              </Link>
+            </div>
           </div>
         ))}
       </div>

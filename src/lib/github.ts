@@ -56,3 +56,20 @@ export async function putFile(
   }
   return res.json();
 }
+
+export async function deleteFile(config: GithubConfig, filePath: string, message: string) {
+  const existing = await getFileContent(config, filePath);
+  if (!existing) return; // déjà absent, rien à faire
+  const res = await githubRequest(config, `contents/${filePath}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      message,
+      sha: existing.sha,
+      branch: config.branch,
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GitHub DELETE ${filePath} a échoué: ${res.status} ${body}`);
+  }
+}
