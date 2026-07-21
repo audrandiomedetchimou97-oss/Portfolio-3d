@@ -97,25 +97,20 @@ export type Project = {
 
 export const projects: Project[] = projectsData as Project[];
 
+// Les certifications vivent dans certifications.json (lu/écrit aussi par l'admin).
+import certificationsData from "./certifications.json";
+
 export type Certification = {
+  slug: string;
   title: string;
   issuer: string;
   date: string;
   credentialUrl?: string;
-  // Chemin vers le visuel du badge/certificat dans /public (ex: "/certifications/power-bi.png").
+  // Chemin vers le visuel du badge/certificat dans /public (ex: "/certifications/mon-cert/1.png").
   image?: string;
 };
 
-export const certifications: Certification[] = [
-  // Exemple à dupliquer :
-  // {
-  //   title: "PL-300: Microsoft Power BI Data Analyst",
-  //   issuer: "Microsoft",
-  //   date: "2025",
-  //   credentialUrl: "",
-  //   image: "/certifications/pl-300.png",
-  // },
-];
+export const certifications: Certification[] = certificationsData as Certification[];
 
 export const futureProjects: string[] = [
   "Mes projets Github",

@@ -11,11 +11,8 @@ export default function Certifications() {
       <section id="certifications" className="section-shell">
         <SectionHeading eyebrow="Preuves" title="Certifications" />
         <div className="glass mx-auto max-w-xl rounded-2xl p-8 text-center text-sm text-foreground-muted">
-          Ajoute tes certifications dans{" "}
-          <code className="rounded bg-[var(--glass-border)] px-1.5 py-0.5">
-            src/data/content.ts
-          </code>{" "}
-          (tableau <code className="rounded bg-[var(--glass-border)] px-1.5 py-0.5">certifications</code>) pour
+          Ajoute tes certifications depuis l&apos;espace{" "}
+          <code className="rounded bg-[var(--glass-border)] px-1.5 py-0.5">/admin</code> pour
           qu&apos;elles apparaissent ici.
         </div>
       </section>
@@ -28,7 +25,7 @@ export default function Certifications() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert, i) => (
           <motion.a
-            key={cert.title}
+            key={cert.slug}
             href={cert.credentialUrl || undefined}
             target={cert.credentialUrl ? "_blank" : undefined}
             rel="noopener noreferrer"
