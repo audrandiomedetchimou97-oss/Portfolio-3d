@@ -11,10 +11,10 @@ export const profile = {
 };
 
 export const socials = {
-  github: "",
-  linkedin: "",
-  email: "",
-  calendly: "",
+  github: "https://github.com/audrandiomedetchimou97-oss",
+  linkedin: "https://www.linkedin.com/in/anon-audran-d-tchimou-b2ba32235/",
+  email: "audrandiomede.tchimou97@gmail.com",
+  calendly: "https://calendly.com/audrandiomede-tchimou97/30min",
 };
 
 export const about = {
