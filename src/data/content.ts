@@ -1,0 +1,138 @@
+// Toutes les infos "modifiables" du portfolio centralisées ici.
+// Remplace les valeurs `""` par tes vrais liens quand tu les as.
+
+export const profile = {
+  name: "Anon Tchimou",
+  role: "Business & Data Analyst",
+  photo: "/photo.jpg",
+  cv: "/CV_Anon_Tchimou.pdf",
+  tagline:
+    "Je transforme des données brutes en décisions claires : reporting BI, dashboards décisionnels et automatisation.",
+};
+
+export const socials = {
+  github: "",
+  linkedin: "",
+  email: "",
+  calendly: "",
+};
+
+export const about = {
+  parcours:
+    "Formé à l'analyse de données et au pilotage de la performance, j'ai développé mon expertise en environnement exigeant chez SNCF Voyageurs et à la Maison d'Accueil L'Îlot, où j'ai conçu des reportings BI et des dashboards décisionnels utilisés au quotidien.",
+  vision:
+    "Pour moi, la donnée n'a de valeur que si elle aide à décider plus vite et mieux. Chaque dashboard doit répondre à une question métier précise, pas seulement afficher des chiffres.",
+  profil:
+    "Rigoureux, orienté résultat et à l'aise autant avec les outils techniques (SQL, Python, Power BI) que dans le dialogue avec les équipes métier, en méthodologie Agile Scrum.",
+};
+
+export type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  bullets: string[];
+};
+
+export const experiences: Experience[] = [
+  {
+    company: "SNCF Voyageurs",
+    role: "Business & Data Analyst",
+    period: "",
+    bullets: [
+      "Reporting BI pour le pilotage de la performance",
+      "Gestion et suivi des indicateurs clés (KPI)",
+      "Conception de dashboards décisionnels",
+      "Automatisation des reportings récurrents",
+      "Aide à la décision auprès des équipes métier",
+    ],
+  },
+  {
+    company: "Maison d'Accueil L'Îlot",
+    role: "Data Analyst",
+    period: "",
+    bullets: [
+      "Data reporting et suivi d'activité",
+      "Analyse comportementale des bénéficiaires",
+      "Automatisation des traitements de données",
+      "Dashboards KPI pour le suivi de la structure",
+    ],
+  },
+];
+
+export const skills: string[] = [
+  "Power BI",
+  "SQL",
+  "Python",
+  "Tableau",
+  "Excel",
+  "AWS S3",
+  "VBA",
+  "Power Query",
+  "Power Pivot",
+  "Jira",
+  "Trello",
+  "Product Owner",
+  "Agile Scrum",
+  "Business Analysis",
+];
+
+// Les projets vivent dans projects.json (lu/écrit aussi par l'admin /admin/projects/new).
+import projectsData from "./projects.json";
+
+export type Project = {
+  slug: string;
+  title: string;
+  description: string;
+  longDescription?: string;
+  tags: string[];
+  // Galerie de captures d'écran, chemins dans /public (ex: "/projects/mon-projet/1.png").
+  images: string[];
+  links: {
+    github?: string;
+    linkedin?: string;
+    demo?: string;
+    documentation?: string;
+  };
+};
+
+export const projects: Project[] = projectsData as Project[];
+
+export type Certification = {
+  title: string;
+  issuer: string;
+  date: string;
+  credentialUrl?: string;
+  // Chemin vers le visuel du badge/certificat dans /public (ex: "/certifications/power-bi.png").
+  image?: string;
+};
+
+export const certifications: Certification[] = [
+  // Exemple à dupliquer :
+  // {
+  //   title: "PL-300: Microsoft Power BI Data Analyst",
+  //   issuer: "Microsoft",
+  //   date: "2025",
+  //   credentialUrl: "",
+  //   image: "/certifications/pl-300.png",
+  // },
+];
+
+export const futureProjects: string[] = [
+  "Mes projets Github",
+  "Mes applications Streamlit",
+  "Mes dashboards Power BI",
+  "Mes projets IA",
+  "Mes projets Machine Learning",
+  "Mes projets Business Intelligence",
+  "Mes études de cas Data",
+];
+
+export const navItems = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About Me" },
+  { id: "experience", label: "Expériences" },
+  { id: "skills", label: "Skills" },
+  { id: "certifications", label: "Certifications" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];

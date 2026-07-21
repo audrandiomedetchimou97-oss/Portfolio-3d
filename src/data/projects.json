@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "reporting-bi",
+    "title": "Reporting BI",
+    "description": "Reporting de pilotage automatisé pour le suivi des indicateurs clés de performance.",
+    "longDescription": "",
+    "tags": [
+      "Power BI",
+      "SQL"
+    ],
+    "images": [],
+    "links": {}
+  },
+  {
+    "slug": "dashboard-power-bi",
+    "title": "Dashboard Power BI",
+    "description": "Dashboard décisionnel interactif conçu pour l'aide à la décision des équipes métier.",
+    "longDescription": "",
+    "tags": [
+      "Power BI",
+      "Power Query",
+      "DAX"
+    ],
+    "images": [],
+    "links": {}
+  },
+  {
+    "slug": "product-data",
+    "title": "Product & Data",
+    "description": "Analyse produit orientée data pour prioriser les fonctionnalités selon l'usage réel.",
+    "longDescription": "",
+    "tags": [
+      "Product Owner",
+      "Business Analysis"
+    ],
+    "images": [],
+    "links": {}
+  },
+  {
+    "slug": "data-analytics",
+    "title": "Data Analytics",
+    "description": "Étude de données exploratoire pour identifier des tendances et guider la stratégie.",
+    "longDescription": "",
+    "tags": [
+      "Python",
+      "SQL",
+      "Excel"
+    ],
+    "images": [],
+    "links": {}
+  }
+]
