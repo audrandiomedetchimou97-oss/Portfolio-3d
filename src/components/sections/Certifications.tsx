@@ -7,16 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 
 export default function Certifications() {
   if (certifications.length === 0) {
-    return (
-      <section id="certifications" className="section-shell">
-        <SectionHeading eyebrow="Preuves" title="Certifications" />
-        <div className="glass mx-auto max-w-xl rounded-2xl p-8 text-center text-sm text-foreground-muted">
-          Ajoute tes certifications depuis l&apos;espace{" "}
-          <code className="rounded bg-[var(--glass-border)] px-1.5 py-0.5">/admin</code> pour
-          qu&apos;elles apparaissent ici.
-        </div>
-      </section>
-    );
+    return null;
   }
 
   return (

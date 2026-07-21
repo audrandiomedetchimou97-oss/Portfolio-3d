@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects, certifications } from "@/data/content";
+import { projects, certifications, experiences } from "@/data/content";
 import LogoutButton from "./LogoutButton";
 
 export default function AdminDashboard() {
@@ -9,6 +9,35 @@ export default function AdminDashboard() {
         <h1 className="text-2xl font-semibold">Admin</h1>
         <LogoutButton />
       </div>
+
+      <section className="mb-12">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Expériences</h2>
+          <Link
+            href="/admin/experiences/new"
+            className="rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] px-5 py-2.5 text-sm font-medium text-white transition-transform hover:scale-105"
+          >
+            + Ajouter une expérience
+          </Link>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {experiences.map((exp) => (
+            <div key={exp.slug} className="glass flex items-center justify-between rounded-xl p-4">
+              <div>
+                <p className="font-medium">{exp.company}</p>
+                <p className="text-xs text-foreground-muted">{exp.role}</p>
+              </div>
+              <Link
+                href={`/admin/experiences/${exp.slug}/edit`}
+                className="text-sm text-[var(--accent-2)] hover:underline"
+              >
+                Éditer
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mb-12">
         <div className="mb-4 flex items-center justify-between">

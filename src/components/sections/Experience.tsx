@@ -13,7 +13,7 @@ export default function Experience() {
         <div className="flex flex-col gap-8">
           {experiences.map((exp, i) => (
             <motion.div
-              key={exp.company}
+              key={exp.slug}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}

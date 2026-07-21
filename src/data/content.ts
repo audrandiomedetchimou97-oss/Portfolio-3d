@@ -26,38 +26,18 @@ export const about = {
     "Rigoureux, orienté résultat et à l'aise autant avec les outils techniques (SQL, Python, Power BI) que dans le dialogue avec les équipes métier, en méthodologie Agile Scrum.",
 };
 
+// Les expériences vivent dans experiences.json (lu/écrit aussi par l'admin).
+import experiencesData from "./experiences.json";
+
 export type Experience = {
+  slug: string;
   company: string;
   role: string;
   period: string;
   bullets: string[];
 };
 
-export const experiences: Experience[] = [
-  {
-    company: "SNCF Voyageurs",
-    role: "Business & Data Analyst",
-    period: "",
-    bullets: [
-      "Reporting BI pour le pilotage de la performance",
-      "Gestion et suivi des indicateurs clés (KPI)",
-      "Conception de dashboards décisionnels",
-      "Automatisation des reportings récurrents",
-      "Aide à la décision auprès des équipes métier",
-    ],
-  },
-  {
-    company: "Maison d'Accueil L'Îlot",
-    role: "Data Analyst",
-    period: "",
-    bullets: [
-      "Data reporting et suivi d'activité",
-      "Analyse comportementale des bénéficiaires",
-      "Automatisation des traitements de données",
-      "Dashboards KPI pour le suivi de la structure",
-    ],
-  },
-];
+export const experiences: Experience[] = experiencesData as Experience[];
 
 export const skills: string[] = [
   "Power BI",
@@ -122,12 +102,21 @@ export const futureProjects: string[] = [
   "Mes études de cas Data",
 ];
 
-export const navItems = [
+const baseNavItems = [
   { id: "home", label: "Home" },
   { id: "about", label: "About Me" },
   { id: "experience", label: "Expériences" },
   { id: "skills", label: "Skills" },
-  { id: "certifications", label: "Certifications" },
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
+
+// Certifications n'apparaît dans la nav que si au moins une certification existe.
+export const navItems =
+  certifications.length > 0
+    ? [
+        ...baseNavItems.slice(0, 4),
+        { id: "certifications", label: "Certifications" },
+        ...baseNavItems.slice(4),
+      ]
+    : baseNavItems;
