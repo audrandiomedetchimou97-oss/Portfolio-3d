@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const OFFICE_EXTENSIONS = ["doc", "docx", "ppt", "pptx", "xls", "xlsx"];
+const OFFICE_EXTENSIONS = ["doc", "docx", "ppt", "pptx", "xls", "xlsx", "xlsm"];
 
 function getExtension(name: string) {
   return name.split(".").pop()?.toLowerCase() || "";

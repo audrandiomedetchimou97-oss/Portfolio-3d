@@ -218,7 +218,7 @@ export default function EditProjectForm({ project }: { project: Project }) {
         </label>
         <input
           type="file"
-          accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.csv"
+          accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.xlsm,.xlsb,.csv"
           multiple
           onChange={(e) => setNewAttachments(e.target.files)}
           className="text-sm"
