@@ -36,6 +36,10 @@ export async function PUT(
     const attachmentFiles = formData
       .getAll("attachments")
       .filter((f): f is File => f instanceof File);
+    const powerBiEmbeds = ((formData.get("powerBiEmbeds") as string) || "")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
 
     if (!title || !description) {
       return NextResponse.json({ error: "Titre et description requis." }, { status: 400 });
@@ -80,6 +84,7 @@ export async function PUT(
       tags,
       images: [...keptImages, ...newImages],
       attachments: [...keptAttachments, ...newAttachments],
+      powerBiEmbeds,
       links: cleanLinks(links),
     };
 

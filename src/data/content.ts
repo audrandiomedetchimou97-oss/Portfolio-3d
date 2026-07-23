@@ -67,8 +67,10 @@ export type Project = {
   tags: string[];
   // Galerie de captures d'écran, chemins dans /public (ex: "/projects/mon-projet/1.png").
   images: string[];
-  // Documents joints (PDF, PowerPoint, Excel, etc.), téléchargeables depuis la fiche projet.
+  // Documents joints (PDF, Word, PowerPoint, Excel...), prévisualisables + téléchargeables.
   attachments: { name: string; url: string }[];
+  // Liens de rapports Power BI publiés sur le web ("Fichier > Publier sur le web").
+  powerBiEmbeds: string[];
   links: {
     github?: string;
     linkedin?: string;

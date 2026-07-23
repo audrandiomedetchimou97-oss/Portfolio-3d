@@ -25,6 +25,10 @@ export async function POST(request: Request) {
     const attachmentFiles = formData
       .getAll("attachments")
       .filter((f): f is File => f instanceof File);
+    const powerBiEmbeds = ((formData.get("powerBiEmbeds") as string) || "")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
 
     if (!title || !description) {
       return NextResponse.json({ error: "Titre et description requis." }, { status: 400 });
@@ -51,6 +55,7 @@ export async function POST(request: Request) {
       tags,
       images: imagePaths,
       attachments,
+      powerBiEmbeds,
       links: cleanLinks(links),
     };
 

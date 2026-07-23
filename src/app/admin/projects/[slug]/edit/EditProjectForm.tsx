@@ -24,6 +24,7 @@ export default function EditProjectForm({ project }: { project: Project }) {
   const [existingAttachments, setExistingAttachments] = useState(project.attachments);
   const [removeAttachments, setRemoveAttachments] = useState<string[]>([]);
   const [newAttachments, setNewAttachments] = useState<FileList | null>(null);
+  const [powerBiEmbeds, setPowerBiEmbeds] = useState(project.powerBiEmbeds.join("\n"));
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
@@ -65,6 +66,7 @@ export default function EditProjectForm({ project }: { project: Project }) {
     if (newAttachments) {
       Array.from(newAttachments).forEach((file) => formData.append("attachments", file));
     }
+    formData.set("powerBiEmbeds", powerBiEmbeds);
 
     const res = await fetch(`/api/admin/projects/${project.slug}`, {
       method: "PUT",
@@ -220,6 +222,19 @@ export default function EditProjectForm({ project }: { project: Project }) {
           multiple
           onChange={(e) => setNewAttachments(e.target.files)}
           className="text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          Rapports Power BI publiés sur le web (un lien par ligne)
+        </label>
+        <textarea
+          rows={3}
+          placeholder="https://app.powerbi.com/view?r=..."
+          value={powerBiEmbeds}
+          onChange={(e) => setPowerBiEmbeds(e.target.value)}
+          className={inputClass}
         />
       </div>
 

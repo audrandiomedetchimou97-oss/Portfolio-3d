@@ -18,6 +18,7 @@ export default function NewProjectForm() {
   const [documentation, setDocumentation] = useState("");
   const [images, setImages] = useState<FileList | null>(null);
   const [attachments, setAttachments] = useState<FileList | null>(null);
+  const [powerBiEmbeds, setPowerBiEmbeds] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -46,6 +47,7 @@ export default function NewProjectForm() {
     if (attachments) {
       Array.from(attachments).forEach((file) => formData.append("attachments", file));
     }
+    formData.set("powerBiEmbeds", powerBiEmbeds);
 
     const res = await fetch("/api/admin/projects", {
       method: "POST",
@@ -144,6 +146,20 @@ export default function NewProjectForm() {
           multiple
           onChange={(e) => setAttachments(e.target.files)}
           className="text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          Rapports Power BI publiés sur le web (un lien par ligne — Power BI Desktop → Fichier →
+          Publier sur le web)
+        </label>
+        <textarea
+          rows={3}
+          placeholder="https://app.powerbi.com/view?r=..."
+          value={powerBiEmbeds}
+          onChange={(e) => setPowerBiEmbeds(e.target.value)}
+          className={inputClass}
         />
       </div>
 

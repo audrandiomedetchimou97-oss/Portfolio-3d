@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { projects, type Project } from "@/data/content";
 import Nav from "@/components/Nav";
 import ThemeToggle from "@/components/ThemeToggle";
+import AttachmentViewer from "@/components/AttachmentViewer";
 
 const linkLabels: Record<keyof Project["links"], string> = {
   github: "Github",
@@ -87,18 +88,29 @@ export default async function ProjectDetailPage({
                 Documents
               </h2>
               {project.attachments.map((a) => (
-                <a
-                  key={a.url}
-                  href={a.url}
-                  download
-                  className="glass flex items-center gap-3 rounded-xl p-4 text-sm transition-transform hover:scale-[1.01]"
+                <AttachmentViewer key={a.url} attachment={a} />
+              ))}
+            </div>
+          )}
+
+          {project.powerBiEmbeds.length > 0 && (
+            <div className="mt-8 flex flex-col gap-6">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-foreground-muted">
+                Rapports Power BI
+              </h2>
+              {project.powerBiEmbeds.map((url) => (
+                <div
+                  key={url}
+                  className="glass overflow-hidden rounded-2xl"
+                  style={{ aspectRatio: "16 / 9" }}
                 >
-                  <span className="text-xl">📄</span>
-                  <span className="truncate">{a.name}</span>
-                  <span className="ml-auto shrink-0 text-xs text-[var(--accent-2)]">
-                    Télécharger
-                  </span>
-                </a>
+                  <iframe
+                    src={url}
+                    className="h-full w-full"
+                    title="Rapport Power BI"
+                    allowFullScreen
+                  />
+                </div>
               ))}
             </div>
           )}
