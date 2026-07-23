@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, type Project } from "@/data/content";
 import Nav from "@/components/Nav";
 import ThemeToggle from "@/components/ThemeToggle";
 import AttachmentViewer from "@/components/AttachmentViewer";
+import ImageGallery from "@/components/ImageGallery";
 
 const linkLabels: Record<keyof Project["links"], string> = {
   github: "Github",
@@ -60,16 +60,7 @@ export default async function ProjectDetailPage({
           </div>
 
           {project.images.length > 0 ? (
-            <div className="mt-10 flex flex-col gap-6">
-              {project.images.map((src) => (
-                <div
-                  key={src}
-                  className="glass relative h-64 w-full overflow-hidden rounded-2xl sm:h-[420px]"
-                >
-                  <Image src={src} alt={project.title} fill className="object-cover" />
-                </div>
-              ))}
-            </div>
+            <ImageGallery images={project.images} alt={project.title} />
           ) : (
             <div className="glass mt-10 flex h-64 w-full items-center justify-center rounded-2xl text-4xl">
               📊
