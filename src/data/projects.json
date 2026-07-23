@@ -9,7 +9,12 @@
       "SQL"
     ],
     "images": [],
-    "attachments": [],
+    "attachments": [
+      {
+        "name": "Reporting_BI_Halden_Retail_Group.pdf",
+        "url": "/projects/reporting-bi/files/1784811346063-reporting-bi-halden-retail-group.pdf"
+      }
+    ],
     "links": {
       "github": "https://github.com/audrandiomedetchimou97-oss/Reporting-BI"
     }
