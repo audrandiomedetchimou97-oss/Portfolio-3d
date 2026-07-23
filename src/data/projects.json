@@ -81,5 +81,23 @@
     "attachments": [],
     "powerBiEmbeds": [],
     "links": {}
+  },
+  {
+    "slug": "calendrier-dynamique",
+    "title": "Calendrier Dynamique",
+    "description": "Calendrier dynamique conçu avec des macros",
+    "longDescription": "",
+    "tags": [],
+    "images": [
+      "/projects/calendrier-dynamique/1.png"
+    ],
+    "attachments": [
+      {
+        "name": "Calendrier-dynamique.xlsm",
+        "url": "/projects/calendrier-dynamique/files/1784814224819-calendrier-dynamique.xlsm"
+      }
+    ],
+    "powerBiEmbeds": [],
+    "links": {}
   }
 ]
