@@ -78,7 +78,12 @@
     "images": [
       "/projects/calendrier-dynamiqe/1.png"
     ],
-    "attachments": [],
+    "attachments": [
+      {
+        "name": "Calendrier-dynamique.xlsm",
+        "url": "/projects/calendrier-dynamiqe/files/1784814278117-calendrier-dynamique.xlsm"
+      }
+    ],
     "powerBiEmbeds": [],
     "links": {}
   },
