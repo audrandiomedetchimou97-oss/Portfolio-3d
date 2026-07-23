@@ -70,24 +70,6 @@
     "links": {}
   },
   {
-    "slug": "calendrier-dynamiqe",
-    "title": "Calendrier Dynamiqe",
-    "description": "Un calendrier dynamique conçu avec des macros (VBA)",
-    "longDescription": "",
-    "tags": [],
-    "images": [
-      "/projects/calendrier-dynamiqe/1.png"
-    ],
-    "attachments": [
-      {
-        "name": "Calendrier-dynamique.xlsm",
-        "url": "/projects/calendrier-dynamiqe/files/1784814278117-calendrier-dynamique.xlsm"
-      }
-    ],
-    "powerBiEmbeds": [],
-    "links": {}
-  },
-  {
     "slug": "calendrier-dynamique",
     "title": "Calendrier Dynamique",
     "description": "Calendrier dynamique conçu avec des macros",
