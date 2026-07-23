@@ -68,5 +68,18 @@
     "attachments": [],
     "powerBiEmbeds": [],
     "links": {}
+  },
+  {
+    "slug": "calendrier-dynamiqe",
+    "title": "Calendrier Dynamiqe",
+    "description": "Un calendrier dynamique conçu avec des macros (VBA)",
+    "longDescription": "",
+    "tags": [],
+    "images": [
+      "/projects/calendrier-dynamiqe/1.png"
+    ],
+    "attachments": [],
+    "powerBiEmbeds": [],
+    "links": {}
   }
 ]
