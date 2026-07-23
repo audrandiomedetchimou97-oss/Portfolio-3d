@@ -81,6 +81,28 @@ export default async function ProjectDetailPage({
             </p>
           </div>
 
+          {project.attachments.length > 0 && (
+            <div className="mt-8 flex flex-col gap-3">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-foreground-muted">
+                Documents
+              </h2>
+              {project.attachments.map((a) => (
+                <a
+                  key={a.url}
+                  href={a.url}
+                  download
+                  className="glass flex items-center gap-3 rounded-xl p-4 text-sm transition-transform hover:scale-[1.01]"
+                >
+                  <span className="text-xl">📄</span>
+                  <span className="truncate">{a.name}</span>
+                  <span className="ml-auto shrink-0 text-xs text-[var(--accent-2)]">
+                    Télécharger
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
+
           {linkEntries.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-3">
               {linkEntries.map(([key, url]) => (

@@ -2,6 +2,7 @@ import {
   createJsonStore,
   getStoreConfig,
   saveImages,
+  saveAttachments,
   deleteImage,
   type GithubConfig,
 } from "@/lib/content-store";
@@ -26,6 +27,19 @@ export async function saveProjectImages(
 
 export async function deleteProjectImage(githubConfig: GithubConfig, relImagePath: string) {
   return deleteImage(githubConfig, relImagePath);
+}
+
+export async function saveProjectAttachments(
+  githubConfig: GithubConfig,
+  slug: string,
+  files: File[],
+  commitLabel: string
+) {
+  return saveAttachments(githubConfig, "projects", slug, files, commitLabel);
+}
+
+export async function deleteProjectAttachment(githubConfig: GithubConfig, relFileUrl: string) {
+  return deleteImage(githubConfig, relFileUrl);
 }
 
 export function cleanLinks(links: Record<string, string>): Project["links"] {

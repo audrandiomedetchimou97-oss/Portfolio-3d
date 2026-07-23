@@ -21,6 +21,9 @@ export default function EditProjectForm({ project }: { project: Project }) {
   const [existingImages, setExistingImages] = useState(project.images);
   const [removeImages, setRemoveImages] = useState<string[]>([]);
   const [newImages, setNewImages] = useState<FileList | null>(null);
+  const [existingAttachments, setExistingAttachments] = useState(project.attachments);
+  const [removeAttachments, setRemoveAttachments] = useState<string[]>([]);
+  const [newAttachments, setNewAttachments] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
@@ -28,6 +31,11 @@ export default function EditProjectForm({ project }: { project: Project }) {
   const toggleRemoveImage = (img: string) => {
     setExistingImages((prev) => prev.filter((i) => i !== img));
     setRemoveImages((prev) => [...prev, img]);
+  };
+
+  const toggleRemoveAttachment = (url: string) => {
+    setExistingAttachments((prev) => prev.filter((a) => a.url !== url));
+    setRemoveAttachments((prev) => [...prev, url]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,6 +60,10 @@ export default function EditProjectForm({ project }: { project: Project }) {
     formData.set("removeImages", JSON.stringify(removeImages));
     if (newImages) {
       Array.from(newImages).forEach((file) => formData.append("images", file));
+    }
+    formData.set("removeAttachments", JSON.stringify(removeAttachments));
+    if (newAttachments) {
+      Array.from(newAttachments).forEach((file) => formData.append("attachments", file));
     }
 
     const res = await fetch(`/api/admin/projects/${project.slug}`, {
@@ -171,6 +183,42 @@ export default function EditProjectForm({ project }: { project: Project }) {
           accept="image/*"
           multiple
           onChange={(e) => setNewImages(e.target.files)}
+          className="text-sm"
+        />
+      </div>
+
+      {existingAttachments.length > 0 && (
+        <div>
+          <label className="mb-2 block text-xs text-foreground-muted">Documents actuels</label>
+          <div className="flex flex-col gap-2">
+            {existingAttachments.map((a) => (
+              <div
+                key={a.url}
+                className="flex items-center justify-between rounded-lg border border-[var(--glass-border)] px-3 py-2 text-sm"
+              >
+                <span className="truncate">📄 {a.name}</span>
+                <button
+                  type="button"
+                  onClick={() => toggleRemoveAttachment(a.url)}
+                  className="cursor-pointer text-xs text-red-400 hover:underline"
+                >
+                  Retirer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          Ajouter des documents (PDF, PowerPoint, Excel, etc.)
+        </label>
+        <input
+          type="file"
+          accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.csv"
+          multiple
+          onChange={(e) => setNewAttachments(e.target.files)}
           className="text-sm"
         />
       </div>

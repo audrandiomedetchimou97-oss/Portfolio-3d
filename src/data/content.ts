@@ -67,6 +67,8 @@ export type Project = {
   tags: string[];
   // Galerie de captures d'écran, chemins dans /public (ex: "/projects/mon-projet/1.png").
   images: string[];
+  // Documents joints (PDF, PowerPoint, Excel, etc.), téléchargeables depuis la fiche projet.
+  attachments: { name: string; url: string }[];
   links: {
     github?: string;
     linkedin?: string;

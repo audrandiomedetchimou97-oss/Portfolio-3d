@@ -70,6 +70,47 @@ export async function saveImages(
   return imagePaths;
 }
 
+export type Attachment = { name: string; url: string };
+
+export async function saveAttachments(
+  githubConfig: GithubConfig,
+  folder: string,
+  slug: string,
+  files: File[],
+  commitLabel: string
+): Promise<Attachment[]> {
+  const attachments: Attachment[] = [];
+  for (const file of files) {
+    const ext = file.name.split(".").pop()?.toLowerCase() || "bin";
+    const safeBase =
+      file.name
+        .replace(/\.[^.]+$/, "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "") || "fichier";
+    const fileName = `${Date.now()}-${safeBase}.${ext}`;
+    const relPath = `${folder}/${slug}/files/${fileName}`;
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    if (githubConfig) {
+      await putFile(
+        githubConfig,
+        `public/${relPath}`,
+        buffer.toString("base64"),
+        `feat: add attachment for ${commitLabel}`
+      );
+    } else {
+      const localPath = path.join(/* turbopackIgnore: true */ process.cwd(), "public", relPath);
+      await fs.mkdir(path.dirname(localPath), { recursive: true });
+      await fs.writeFile(localPath, buffer);
+    }
+    attachments.push({ name: file.name, url: `/${relPath}` });
+  }
+  return attachments;
+}
+
 export async function deleteImage(githubConfig: GithubConfig, relImagePath: string) {
   const cleanRel = relImagePath.replace(/^\//, "");
   if (githubConfig) {

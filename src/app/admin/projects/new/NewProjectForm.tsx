@@ -17,6 +17,7 @@ export default function NewProjectForm() {
   const [demo, setDemo] = useState("");
   const [documentation, setDocumentation] = useState("");
   const [images, setImages] = useState<FileList | null>(null);
+  const [attachments, setAttachments] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -41,6 +42,9 @@ export default function NewProjectForm() {
     formData.set("links", JSON.stringify({ github, linkedin, demo, documentation }));
     if (images) {
       Array.from(images).forEach((file) => formData.append("images", file));
+    }
+    if (attachments) {
+      Array.from(attachments).forEach((file) => formData.append("attachments", file));
     }
 
     const res = await fetch("/api/admin/projects", {
@@ -126,6 +130,19 @@ export default function NewProjectForm() {
           accept="image/*"
           multiple
           onChange={(e) => setImages(e.target.files)}
+          className="text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          Documents joints (PDF, PowerPoint, Excel, etc.)
+        </label>
+        <input
+          type="file"
+          accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.csv"
+          multiple
+          onChange={(e) => setAttachments(e.target.files)}
           className="text-sm"
         />
       </div>

@@ -5,6 +5,7 @@ import {
   readProjects,
   writeProjects,
   saveProjectImages,
+  saveProjectAttachments,
   slugify,
   cleanLinks,
 } from "@/lib/projects-store";
@@ -21,6 +22,9 @@ export async function POST(request: Request) {
       string
     >;
     const files = formData.getAll("images").filter((f): f is File => f instanceof File);
+    const attachmentFiles = formData
+      .getAll("attachments")
+      .filter((f): f is File => f instanceof File);
 
     if (!title || !description) {
       return NextResponse.json({ error: "Titre et description requis." }, { status: 400 });
@@ -37,6 +41,7 @@ export async function POST(request: Request) {
     }
 
     const imagePaths = await saveProjectImages(githubConfig, slug, files, 1, title);
+    const attachments = await saveProjectAttachments(githubConfig, slug, attachmentFiles, title);
 
     const newProject: Project = {
       slug,
@@ -45,6 +50,7 @@ export async function POST(request: Request) {
       longDescription,
       tags,
       images: imagePaths,
+      attachments,
       links: cleanLinks(links),
     };
 

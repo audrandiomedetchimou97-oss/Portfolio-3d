@@ -5,7 +5,9 @@ import {
   readProjects,
   writeProjects,
   saveProjectImages,
+  saveProjectAttachments,
   deleteProjectImage,
+  deleteProjectAttachment,
   cleanLinks,
 } from "@/lib/projects-store";
 
@@ -27,7 +29,13 @@ export async function PUT(
     const removeImages = JSON.parse(
       (formData.get("removeImages") as string) || "[]"
     ) as string[];
+    const removeAttachments = JSON.parse(
+      (formData.get("removeAttachments") as string) || "[]"
+    ) as string[];
     const files = formData.getAll("images").filter((f): f is File => f instanceof File);
+    const attachmentFiles = formData
+      .getAll("attachments")
+      .filter((f): f is File => f instanceof File);
 
     if (!title || !description) {
       return NextResponse.json({ error: "Titre et description requis." }, { status: 400 });
@@ -48,8 +56,21 @@ export async function PUT(
     }
     const keptImages = current.images.filter((img) => !removeImages.includes(img));
 
+    for (const url of removeAttachments) {
+      await deleteProjectAttachment(githubConfig, url);
+    }
+    const keptAttachments = current.attachments.filter(
+      (a) => !removeAttachments.includes(a.url)
+    );
+
     const startIndex = Date.now();
     const newImages = await saveProjectImages(githubConfig, slug, files, startIndex, title);
+    const newAttachments = await saveProjectAttachments(
+      githubConfig,
+      slug,
+      attachmentFiles,
+      title
+    );
 
     const updated: Project = {
       ...current,
@@ -58,6 +79,7 @@ export async function PUT(
       longDescription,
       tags,
       images: [...keptImages, ...newImages],
+      attachments: [...keptAttachments, ...newAttachments],
       links: cleanLinks(links),
     };
 
@@ -91,6 +113,9 @@ export async function DELETE(
 
     for (const img of target.images) {
       await deleteProjectImage(githubConfig, img);
+    }
+    for (const a of target.attachments) {
+      await deleteProjectAttachment(githubConfig, a.url);
     }
 
     const updatedProjects = projects.filter((p) => p.slug !== slug);
