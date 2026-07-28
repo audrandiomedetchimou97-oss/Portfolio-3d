@@ -2,6 +2,7 @@ import {
   createJsonStore,
   getStoreConfig,
   saveImages,
+  saveAttachments,
   deleteImage,
   type GithubConfig,
 } from "@/lib/content-store";
@@ -26,4 +27,27 @@ export async function saveCertificationImage(
 
 export async function deleteCertificationImage(githubConfig: GithubConfig, relImagePath: string) {
   return deleteImage(githubConfig, relImagePath);
+}
+
+export async function saveCertificationAttachment(
+  githubConfig: GithubConfig,
+  slug: string,
+  file: File,
+  commitLabel: string
+): Promise<{ name: string; url: string } | undefined> {
+  const [attachment] = await saveAttachments(
+    githubConfig,
+    "certifications",
+    slug,
+    [file],
+    commitLabel
+  );
+  return attachment;
+}
+
+export async function deleteCertificationAttachment(
+  githubConfig: GithubConfig,
+  relFileUrl: string
+) {
+  return deleteImage(githubConfig, relFileUrl);
 }

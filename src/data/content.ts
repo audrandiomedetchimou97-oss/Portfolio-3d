@@ -92,6 +92,8 @@ export type Certification = {
   credentialUrl?: string;
   // Chemin vers le visuel du badge/certificat dans /public (ex: "/certifications/mon-cert/1.png").
   image?: string;
+  // PDF du certificat importé (utilisé comme lien si pas de credentialUrl).
+  attachment?: { name: string; url: string };
 };
 
 export const certifications: Certification[] = certificationsData as Certification[];

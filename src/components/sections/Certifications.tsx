@@ -14,18 +14,20 @@ export default function Certifications() {
     <section id="certifications" className="section-shell">
       <SectionHeading eyebrow="Preuves" title="Certifications" />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {certifications.map((cert, i) => (
+        {certifications.map((cert, i) => {
+          const href = cert.credentialUrl || cert.attachment?.url;
+          return (
           <motion.a
             key={cert.slug}
-            href={cert.credentialUrl || undefined}
-            target={cert.credentialUrl ? "_blank" : undefined}
+            href={href || undefined}
+            target={href ? "_blank" : undefined}
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
             className={`glass flex flex-col gap-4 rounded-2xl p-6 ${
-              cert.credentialUrl ? "hover:-translate-y-1 transition-transform" : ""
+              href ? "hover:-translate-y-1 transition-transform" : ""
             }`}
           >
             {cert.image ? (
@@ -44,7 +46,8 @@ export default function Certifications() {
               </p>
             </div>
           </motion.a>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

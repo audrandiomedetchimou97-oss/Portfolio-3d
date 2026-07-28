@@ -13,6 +13,7 @@ export default function NewCertificationForm() {
   const [date, setDate] = useState("");
   const [credentialUrl, setCredentialUrl] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [attachment, setAttachment] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -27,6 +28,7 @@ export default function NewCertificationForm() {
     formData.set("date", date);
     formData.set("credentialUrl", credentialUrl);
     if (image) formData.set("image", image);
+    if (attachment) formData.set("attachment", attachment);
 
     const res = await fetch("/api/admin/certifications", {
       method: "POST",
@@ -81,6 +83,18 @@ export default function NewCertificationForm() {
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files?.[0] || null)}
+          className="text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          Certificat en PDF (si pas de lien de vérification)
+        </label>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={(e) => setAttachment(e.target.files?.[0] || null)}
           className="text-sm"
         />
       </div>

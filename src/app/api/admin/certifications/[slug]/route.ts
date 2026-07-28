@@ -6,6 +6,8 @@ import {
   writeCertifications,
   saveCertificationImage,
   deleteCertificationImage,
+  saveCertificationAttachment,
+  deleteCertificationAttachment,
 } from "@/lib/certifications-store";
 
 export async function PUT(
@@ -21,6 +23,8 @@ export async function PUT(
     const credentialUrl = ((formData.get("credentialUrl") as string) || "").trim();
     const removeImage = formData.get("removeImage") === "true";
     const imageFile = formData.get("image");
+    const removeAttachment = formData.get("removeAttachment") === "true";
+    const attachmentFile = formData.get("attachment");
 
     if (!title || !issuer) {
       return NextResponse.json({ error: "Titre et organisme requis." }, { status: 400 });
@@ -47,6 +51,18 @@ export async function PUT(
       image = await saveCertificationImage(githubConfig, slug, imageFile, title);
     }
 
+    let attachment = current.attachment;
+
+    if (removeAttachment && attachment) {
+      await deleteCertificationAttachment(githubConfig, attachment.url);
+      attachment = undefined;
+    }
+
+    if (attachmentFile instanceof File && attachmentFile.size > 0) {
+      if (attachment) await deleteCertificationAttachment(githubConfig, attachment.url);
+      attachment = await saveCertificationAttachment(githubConfig, slug, attachmentFile, title);
+    }
+
     const updated: Certification = {
       ...current,
       title,
@@ -54,6 +70,7 @@ export async function PUT(
       date,
       credentialUrl: credentialUrl || undefined,
       image,
+      attachment,
     };
 
     const updatedList = [...certifications];
@@ -86,6 +103,9 @@ export async function DELETE(
 
     if (target.image) {
       await deleteCertificationImage(githubConfig, target.image);
+    }
+    if (target.attachment) {
+      await deleteCertificationAttachment(githubConfig, target.attachment.url);
     }
 
     const updated = certifications.filter((c) => c.slug !== slug);

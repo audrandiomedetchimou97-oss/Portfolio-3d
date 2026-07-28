@@ -21,6 +21,9 @@ export default function EditCertificationForm({
   const [currentImage, setCurrentImage] = useState(certification.image);
   const [removeImage, setRemoveImage] = useState(false);
   const [newImage, setNewImage] = useState<File | null>(null);
+  const [currentAttachment, setCurrentAttachment] = useState(certification.attachment);
+  const [removeAttachment, setRemoveAttachment] = useState(false);
+  const [newAttachment, setNewAttachment] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
@@ -37,6 +40,8 @@ export default function EditCertificationForm({
     formData.set("credentialUrl", credentialUrl);
     formData.set("removeImage", String(removeImage));
     if (newImage) formData.set("image", newImage);
+    formData.set("removeAttachment", String(removeAttachment));
+    if (newAttachment) formData.set("attachment", newAttachment);
 
     const res = await fetch(`/api/admin/certifications/${certification.slug}`, {
       method: "PUT",
@@ -126,6 +131,39 @@ export default function EditCertificationForm({
           type="file"
           accept="image/*"
           onChange={(e) => setNewImage(e.target.files?.[0] || null)}
+          className="text-sm"
+        />
+      </div>
+
+      {currentAttachment && !removeAttachment && (
+        <div>
+          <label className="mb-2 block text-xs text-foreground-muted">
+            Certificat PDF actuel
+          </label>
+          <div className="flex items-center justify-between rounded-lg border border-[var(--glass-border)] px-3 py-2 text-sm">
+            <span className="truncate">📄 {currentAttachment.name}</span>
+            <button
+              type="button"
+              onClick={() => {
+                setRemoveAttachment(true);
+                setCurrentAttachment(undefined);
+              }}
+              className="cursor-pointer text-xs text-red-400 hover:underline"
+            >
+              Retirer
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <label className="mb-2 block text-xs text-foreground-muted">
+          {currentAttachment ? "Remplacer le certificat PDF" : "Importer le certificat en PDF"}
+        </label>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={(e) => setNewAttachment(e.target.files?.[0] || null)}
           className="text-sm"
         />
       </div>
