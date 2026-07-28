@@ -98,16 +98,6 @@ export type Certification = {
 
 export const certifications: Certification[] = certificationsData as Certification[];
 
-export const futureProjects: string[] = [
-  "Mes projets Github",
-  "Mes applications Streamlit",
-  "Mes dashboards Power BI",
-  "Mes projets IA",
-  "Mes projets Machine Learning",
-  "Mes projets Business Intelligence",
-  "Mes études de cas Data",
-];
-
 const baseNavItems = [
   { id: "home", label: "Home" },
   { id: "about", label: "About Me" },

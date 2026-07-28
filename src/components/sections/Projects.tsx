@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { futureProjects, projects, type Project } from "@/data/content";
+import { projects, type Project } from "@/data/content";
 import SectionHeading from "@/components/SectionHeading";
 
 const linkLabels: Record<keyof Project["links"], string> = {
@@ -85,28 +85,6 @@ export default function Projects() {
           );
         })}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5 }}
-        className="glass mt-8 rounded-2xl p-6 sm:p-8"
-      >
-        <h3 className="text-gradient mb-4 text-sm font-semibold uppercase tracking-[0.15em]">
-          Futurs projets
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {futureProjects.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-dashed border-[var(--glass-border)] px-4 py-2 text-xs text-foreground-muted"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 }
