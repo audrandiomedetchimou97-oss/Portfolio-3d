@@ -32,12 +32,12 @@ export default function Projects() {
             >
               <Link href={`/projects/${project.slug}`} className="flex flex-col gap-4">
                 {project.images[0] ? (
-                  <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-2xl sm:-mx-8 sm:-mt-8 sm:h-52">
+                  <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-2xl bg-black/20 sm:-mx-8 sm:-mt-8 sm:h-52">
                     <Image
                       src={project.images[0]}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      className="object-contain transition-transform duration-500 hover:scale-105"
                     />
                   </div>
                 ) : (
